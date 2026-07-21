@@ -1,0 +1,21 @@
+﻿services:
+  - type: web
+    name: voice-ai-assistant-api
+    runtime: java
+    plan: free
+    region: singapore
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -jar target/ai-ml-voice-assistant-1.0.0.jar
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: FRONTEND_URL
+        value: https://voice-ai-frontend.vercel.app
+      - key: SPRING_PROFILES_ACTIVE
+        value: production
+      - key: PORT
+        value: 8080

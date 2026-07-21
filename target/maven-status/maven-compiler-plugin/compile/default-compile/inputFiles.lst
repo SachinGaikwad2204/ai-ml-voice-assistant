@@ -1,0 +1,13 @@
+E:\Project\ai-ml-voice-assistant\src\main\java\com\aiml\voice\model\Conversation.java
+E:\Project\ai-ml-voice-assistant\src\main\java\com\aiml\voice\ml\NeuralNetwork.java
+E:\Project\ai-ml-voice-assistant\src\main\java\com\aiml\voice\repository\ConversationRepository.java
+E:\Project\ai-ml-voice-assistant\src\main\java\com\aiml\voice\service\IntentClassifierService.java
+E:\Project\ai-ml-voice-assistant\src\main\java\com\aiml\voice\audio\AudioRecorder.java
+E:\Project\ai-ml-voice-assistant\src\main\java\com\aiml\voice\service\AIService.java
+E:\Project\ai-ml-voice-assistant\src\main\java\com\aiml\voice\nlp\TextProcessor.java
+E:\Project\ai-ml-voice-assistant\src\main\java\com\aiml\voice\ml\ModelTrainer.java
+E:\Project\ai-ml-voice-assistant\src\main\java\com\aiml\voice\service\AutomaticTrainingService.java
+E:\Project\ai-ml-voice-assistant\src\main\java\com\aiml\voice\controller\VoiceController.java
+E:\Project\ai-ml-voice-assistant\src\main\java\com\aiml\voice\ml\IntentClassifier.java
+E:\Project\ai-ml-voice-assistant\src\main\java\com\aiml\voice\service\TrainingService.java
+E:\Project\ai-ml-voice-assistant\src\main\java\com\aiml\voice\VoiceAssistantApplication.java
