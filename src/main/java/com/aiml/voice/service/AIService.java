@@ -116,7 +116,7 @@ public class AIService {
         zhKeywords.put("ABOUT", new String[]{"关于", "是谁", "能做什么"});
         LANGUAGE_KEYWORDS.put("zh", zhKeywords);
         
-        // ===== RESPONSES FOR EACH LANGUAGE =====
+        // ===== LANGUAGE RESPONSES =====
         // English Responses
         Map<String, String[]> enResponses = new HashMap<>();
         enResponses.put("GREETING", new String[]{"Hello! How can I help you today? 😊", "Hi there! What can I do for you?", "Hey! Great to see you! How can I assist you?"});
@@ -267,16 +267,15 @@ public class AIService {
             return "UNKNOWN";
         }
         
-        // Use the message as-is (don't convert to lowercase for non-English)
         String msg = message.trim();
-        
-        // For English, also check lowercase
-        String msgLower = msg.toLowerCase();
-        
         Map<String, Integer> scores = new HashMap<>();
         
-        // Get keywords for the language, fallback to English
-        Map<String, String[]> keywords = LANGUAGE_KEYWORDS.getOrDefault(language, LANGUAGE_KEYWORDS.get("en"));
+        // Get keywords for the language
+        Map<String, String[]> keywords = LANGUAGE_KEYWORDS.get(language);
+        if (keywords == null) {
+            // Fallback to English if language not supported
+            keywords = LANGUAGE_KEYWORDS.get("en");
+        }
         
         for (Map.Entry<String, String[]> entry : keywords.entrySet()) {
             String intent = entry.getKey();
@@ -284,19 +283,15 @@ public class AIService {
             int score = 0;
             
             for (String word : words) {
-                // Check both original and lowercase for English
                 if (language.equals("en")) {
-                    if (msgLower.contains(word.toLowerCase())) {
+                    // English: case-insensitive check
+                    if (msg.toLowerCase().contains(word.toLowerCase())) {
                         score += 2;
                     }
                 } else {
-                    // For other languages, check as-is
+                    // Other languages: exact match (case-sensitive)
                     if (msg.contains(word)) {
                         score += 2;
-                    }
-                    // Also check lowercase for Latin script languages
-                    if (msgLower.contains(word.toLowerCase())) {
-                        score += 1;
                     }
                 }
             }
@@ -320,8 +315,13 @@ public class AIService {
     }
     
     private String getResponseForIntent(String intent, String language) {
-        // Get language-specific responses, fallback to English
-        Map<String, String[]> responses = LANGUAGE_RESPONSES.getOrDefault(language, LANGUAGE_RESPONSES.get("en"));
+        // Get language-specific responses
+        Map<String, String[]> responses = LANGUAGE_RESPONSES.get(language);
+        if (responses == null) {
+            // Fallback to English
+            responses = LANGUAGE_RESPONSES.get("en");
+        }
+        
         String[] responseList = responses.getOrDefault(intent, responses.get("UNKNOWN"));
         Random random = new Random();
         return responseList[random.nextInt(responseList.length)];
