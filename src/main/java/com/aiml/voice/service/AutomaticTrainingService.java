@@ -15,10 +15,15 @@ import java.util.*;
 public class AutomaticTrainingService {
     
     @Autowired
-    private ConversationRepository conversationRepository;
-    
+    private final ConversationRepository conversationRepository;
+    private final IntentClassifierService intentClassifierService;
+
     @Autowired
-    private IntentClassifierService intentClassifierService;
+    public AutomaticTrainingService(ConversationRepository conversationRepository,
+                                    IntentClassifierService intentClassifierService) {
+        this.conversationRepository = conversationRepository;
+        this.intentClassifierService = intentClassifierService;
+    }
     
     private static final int MIN_SAMPLES_FOR_TRAINING = 5;
     private static final long AUTO_TRAIN_INTERVAL = 60000;
