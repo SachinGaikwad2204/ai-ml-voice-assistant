@@ -19,34 +19,43 @@ public class AIService {
     static {
         // ===== ENGLISH KEYWORDS =====
         Map<String, String[]> enKeywords = new HashMap<>();
-        enKeywords.put("GREETING", new String[]{"hello", "hi", "hey", "greetings", "good morning", "good afternoon", "good evening", "how are you", "what's up", "howdy"});
-        enKeywords.put("TIME", new String[]{"time", "clock", "hour", "minute", "what time", "current time", "time now", "o'clock"});
-        enKeywords.put("WEATHER", new String[]{"weather", "rain", "sunny", "cloud", "temperature", "forecast", "hot", "cold", "warm"});
-        enKeywords.put("MUSIC", new String[]{"music", "song", "play", "listen", "melody", "tune", "playlist", "audio"});
+        enKeywords.put("GREETING", new String[]{"hello", "hi", "hey", "greetings", "good morning", "good afternoon", "good evening", "how are you", "what's up"});
+        enKeywords.put("TIME", new String[]{"time", "clock", "hour", "minute", "what time", "current time", "time now"});
+        enKeywords.put("WEATHER", new String[]{"weather", "rain", "sunny", "cloud", "temperature", "forecast", "hot", "cold"});
+        enKeywords.put("MUSIC", new String[]{"music", "song", "play", "listen", "melody", "tune", "playlist"});
         enKeywords.put("HELP", new String[]{"help", "assist", "support", "guide", "advice", "suggestion", "stuck", "problem"});
-        enKeywords.put("JOKE", new String[]{"joke", "funny", "laugh", "humor", "comedy", "hilarious", "make me laugh"});
-        enKeywords.put("GOODBYE", new String[]{"bye", "goodbye", "see you", "farewell", "later", "take care", "see ya"});
-        enKeywords.put("THANKYOU", new String[]{"thank", "thanks", "appreciate", "grateful", "thank you", "thanks a lot"});
-        enKeywords.put("NAME", new String[]{"name", "call you", "who are you", "your name", "what are you called"});
-        enKeywords.put("ABOUT", new String[]{"about", "what are you", "tell me about yourself", "what can you do", "what do you do"});
+        enKeywords.put("JOKE", new String[]{"joke", "funny", "laugh", "humor", "comedy", "hilarious"});
+        enKeywords.put("GOODBYE", new String[]{"bye", "goodbye", "see you", "farewell", "later", "take care"});
+        enKeywords.put("THANKYOU", new String[]{"thank", "thanks", "appreciate", "grateful", "thank you"});
+        enKeywords.put("NAME", new String[]{"name", "call you", "who are you", "your name"});
+        enKeywords.put("ABOUT", new String[]{"about", "what are you", "tell me about yourself", "what can you do"});
         LANGUAGE_KEYWORDS.put("en", enKeywords);
         
-        // ===== GERMAN KEYWORDS (with variations) =====
+        // ===== GERMAN KEYWORDS (Comprehensive) =====
         Map<String, String[]> deKeywords = new HashMap<>();
         deKeywords.put("GREETING", new String[]{
-            "hallo", "hi", "guten morgen", "guten tag", "guten abend", 
-            "wie geht es dir", "morgen", "tag", "abend", "hallo!", 
-            "guten", "morgen", "gutenmorgen"
+            // Various forms of "hello"
+            "hallo", "halo", "hello", 
+            // "Good morning" and variations
+            "guten morgen", "gutenmorgen", "morgen", 
+            // "Good day" and variations
+            "guten tag", "gutentag", "tag", 
+            // "Good evening" and variations
+            "guten abend", "gutenabend", "abend",
+            // "How are you" and variations
+            "wie geht es dir", "wie gehts", "wie geht's", "wie geht es ihnen",
+            // "Hello" variations
+            "servus", "moin", "na", "hallo!", "hi"
         });
-        deKeywords.put("TIME", new String[]{"uhr", "zeit", "wie spät", "stunde", "minute"});
-        deKeywords.put("WEATHER", new String[]{"wetter", "regen", "sonne", "wolke", "temperatur", "heiss", "kalt"});
-        deKeywords.put("MUSIC", new String[]{"musik", "lied", "spielen", "hören", "playlist", "melodie"});
-        deKeywords.put("HELP", new String[]{"hilfe", "unterstützung", "rat", "problem", "assistenz"});
-        deKeywords.put("JOKE", new String[]{"witz", "lachen", "humor", "komisch", "spass"});
-        deKeywords.put("GOODBYE", new String[]{"auf wiedersehen", "tschüss", "bis bald", "ade", "bye"});
-        deKeywords.put("THANKYOU", new String[]{"danke", "danke schön", "vielen dank"});
-        deKeywords.put("NAME", new String[]{"name", "wie heißt du", "wer bist du"});
-        deKeywords.put("ABOUT", new String[]{"über", "wer bist du", "was machst du", "erzähl mir von dir"});
+        deKeywords.put("TIME", new String[]{"uhr", "zeit", "wie spät", "spät", "stunde", "minute", "uhrzeit"});
+        deKeywords.put("WEATHER", new String[]{"wetter", "regen", "sonne", "wolke", "temperatur", "heiß", "kalt", "warm", "schnee"});
+        deKeywords.put("MUSIC", new String[]{"musik", "lied", "spielen", "hören", "playlist", "melodie", "song"});
+        deKeywords.put("HELP", new String[]{"hilfe", "unterstützung", "rat", "problem", "assistenz", "helfen"});
+        deKeywords.put("JOKE", new String[]{"witz", "lachen", "humor", "komisch", "spaß", "witze"});
+        deKeywords.put("GOODBYE", new String[]{"auf wiedersehen", "wiedersehen", "tschüss", "bis bald", "ade", "bye", "tschüssi"});
+        deKeywords.put("THANKYOU", new String[]{"danke", "danke schön", "dankeschön", "vielen dank", "merci"});
+        deKeywords.put("NAME", new String[]{"name", "wie heißt du", "wie heisst du", "wer bist du", "dein name"});
+        deKeywords.put("ABOUT", new String[]{"über", "wer bist du", "was machst du", "erzähl mir von dir", "was kannst du"});
         LANGUAGE_KEYWORDS.put("de", deKeywords);
         
         // ===== HINDI KEYWORDS =====
@@ -65,8 +74,8 @@ public class AIService {
         
         // ===== SPANISH KEYWORDS =====
         Map<String, String[]> esKeywords = new HashMap<>();
-        esKeywords.put("GREETING", new String[]{"hola", "buenos días", "buenas tardes", "buenas noches", "cómo estás", "saludos", "qué tal", "hola"});
-        esKeywords.put("TIME", new String[]{"hora", "reloj", "qué hora", "hora actual", "tiempo", "hora es", "que hora"});
+        esKeywords.put("GREETING", new String[]{"hola", "buenos días", "buenas tardes", "buenas noches", "cómo estás", "saludos", "qué tal"});
+        esKeywords.put("TIME", new String[]{"hora", "reloj", "qué hora", "hora actual", "tiempo", "hora es"});
         esKeywords.put("WEATHER", new String[]{"clima", "lluvia", "soleado", "nube", "temperatura", "calor", "frío", "tiempo"});
         esKeywords.put("MUSIC", new String[]{"música", "canción", "reproducir", "escuchar", "playlist", "musica"});
         esKeywords.put("HELP", new String[]{"ayuda", "asistencia", "apoyo", "guía", "consejo", "problema", "ayudar"});
@@ -79,7 +88,7 @@ public class AIService {
         
         // ===== FRENCH KEYWORDS =====
         Map<String, String[]> frKeywords = new HashMap<>();
-        frKeywords.put("GREETING", new String[]{"bonjour", "salut", "coucou", "bonsoir", "comment ça va", "ça va", "bonjour"});
+        frKeywords.put("GREETING", new String[]{"bonjour", "salut", "coucou", "bonsoir", "comment ça va", "ça va"});
         frKeywords.put("TIME", new String[]{"heure", "quelle heure", "horaire", "minute", "temps"});
         frKeywords.put("WEATHER", new String[]{"météo", "pluie", "soleil", "nuage", "température", "chaud", "froid"});
         frKeywords.put("MUSIC", new String[]{"musique", "chanson", "jouer", "écouter", "playlist", "mélodie"});
@@ -119,7 +128,7 @@ public class AIService {
         zhKeywords.put("ABOUT", new String[]{"关于", "是谁", "能做什么"});
         LANGUAGE_KEYWORDS.put("zh", zhKeywords);
         
-        // ===== RESPONSES (simplified for brevity) =====
+        // ===== RESPONSES (simplified) =====
         // English Responses
         Map<String, String[]> enResponses = new HashMap<>();
         enResponses.put("GREETING", new String[]{"Hello! How can I help you today? 😊", "Hi there! What can I do for you?"});
@@ -137,7 +146,7 @@ public class AIService {
         
         // German Responses
         Map<String, String[]> deResponses = new HashMap<>();
-        deResponses.put("GREETING", new String[]{"Hallo! Wie kann ich Ihnen helfen? 😊", "Hi! Was kann ich für Sie tun?"});
+        deResponses.put("GREETING", new String[]{"Hallo! Wie kann ich Ihnen helfen? 😊", "Hi! Was kann ich für Sie tun?", "Guten Tag! Wie kann ich Ihnen helfen?"});
         deResponses.put("TIME", new String[]{"Die aktuelle Zeit ist: " + new Date(), "Es ist " + new Date() + " jetzt."});
         deResponses.put("WEATHER", new String[]{"Das Wetter ist heute schön! ☀️", "Die Vorhersage zeigt klaren Himmel."});
         deResponses.put("MUSIC", new String[]{"🎵 Ich spiele Musik für Sie!", "Lassen Sie mich die perfekte Playlist finden! 🎶"});
@@ -268,8 +277,7 @@ public class AIService {
             return "UNKNOWN";
         }
         
-        String msg = message.trim();
-        String msgLower = msg.toLowerCase();
+        String msg = message.trim().toLowerCase();
         Map<String, Integer> scores = new HashMap<>();
         
         Map<String, String[]> keywords = LANGUAGE_KEYWORDS.get(language);
@@ -277,32 +285,14 @@ public class AIService {
             keywords = LANGUAGE_KEYWORDS.get("en");
         }
         
-        // Special handling for German - check multiple variations
         for (Map.Entry<String, String[]> entry : keywords.entrySet()) {
             String intent = entry.getKey();
             String[] words = entry.getValue();
             int score = 0;
             
             for (String word : words) {
-                // Check if the message contains the keyword (case-insensitive)
-                if (msgLower.contains(word.toLowerCase())) {
+                if (msg.contains(word.toLowerCase())) {
                     score += 2;
-                }
-                // For German, also check without special characters
-                if (language.equals("de")) {
-                    String msgNormalized = msgLower
-                        .replace("ä", "a")
-                        .replace("ö", "o")
-                        .replace("ü", "u")
-                        .replace("ß", "ss");
-                    String wordNormalized = word.toLowerCase()
-                        .replace("ä", "a")
-                        .replace("ö", "o")
-                        .replace("ü", "u")
-                        .replace("ß", "ss");
-                    if (msgNormalized.contains(wordNormalized)) {
-                        score += 1;
-                    }
                 }
             }
             
