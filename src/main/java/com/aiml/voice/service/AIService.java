@@ -75,7 +75,7 @@ public class AIService {
         
         // ===== GERMAN KEYWORDS =====
         Map<String, String[]> deKeywords = new HashMap<>();
-        deKeywords.put("GREETING", new String[]{"hallo", "hi", "guten morgen", "guten tag", "guten abend", "wie geht es dir", "hallo", "guten Morgen", "Guten Morgen"});
+        deKeywords.put("GREETING", new String[]{"hallo", "hi", "guten morgen", "guten tag", "guten abend", "wie geht es dir", "hallo", "guten Morgen", "Guten Morgen", "morgen"});
         deKeywords.put("TIME", new String[]{"uhr", "zeit", "wie spät", "stunde", "minute"});
         deKeywords.put("WEATHER", new String[]{"wetter", "regen", "sonne", "wolke", "temperatur", "heiß", "kalt"});
         deKeywords.put("MUSIC", new String[]{"musik", "lied", "spielen", "hören", "playlist", "melodie"});
@@ -115,7 +115,7 @@ public class AIService {
         zhKeywords.put("ABOUT", new String[]{"关于", "是谁", "能做什么"});
         LANGUAGE_KEYWORDS.put("zh", zhKeywords);
         
-        // ===== LANGUAGE RESPONSES (same as before) =====
+        // ===== LANGUAGE RESPONSES =====
         // English Responses
         Map<String, String[]> enResponses = new HashMap<>();
         enResponses.put("GREETING", new String[]{"Hello! How can I help you today? 😊", "Hi there! What can I do for you?", "Hey! Great to see you! How can I assist you?"});
@@ -279,16 +279,9 @@ public class AIService {
             int score = 0;
             
             for (String word : words) {
-                // For Latin script languages (English, Spanish, French, German) - case insensitive
-                if (language.equals("en") || language.equals("es") || language.equals("fr") || language.equals("de")) {
-                    if (msgLower.contains(word.toLowerCase())) {
-                        score += 2;
-                    }
-                } else {
-                    // For Hindi, Japanese, Chinese - exact match (case sensitive)
-                    if (msg.contains(word)) {
-                        score += 2;
-                    }
+                // Case-insensitive matching for ALL languages
+                if (msgLower.contains(word.toLowerCase())) {
+                    score += 2;
                 }
             }
             
