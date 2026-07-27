@@ -19,7 +19,7 @@ public class AIService {
     static {
         // ===== ENGLISH KEYWORDS =====
         Map<String, String[]> enKeywords = new HashMap<>();
-        enKeywords.put("GREETING", new String[]{"hello", "hi", "hey", "greetings", "good morning", "good afternoon", "good evening", "how are you", "what's up"});
+        enKeywords.put("GREETING", new String[]{"hello", "hi", "hey", "greetings", "good morning", "good afternoon", "good evening", "how are you", "what's up", "howdy"});
         enKeywords.put("TIME", new String[]{"time", "clock", "hour", "minute", "what time", "current time", "time now", "o'clock"});
         enKeywords.put("WEATHER", new String[]{"weather", "rain", "sunny", "cloud", "temperature", "forecast", "hot", "cold", "warm"});
         enKeywords.put("MUSIC", new String[]{"music", "song", "play", "listen", "melody", "tune", "playlist", "audio"});
@@ -47,7 +47,7 @@ public class AIService {
         
         // ===== SPANISH KEYWORDS =====
         Map<String, String[]> esKeywords = new HashMap<>();
-        esKeywords.put("GREETING", new String[]{"hola", "buenos días", "buenas tardes", "buenas noches", "cómo estás", "saludos", "qué tal", "hola!"});
+        esKeywords.put("GREETING", new String[]{"hola", "buenos días", "buenas tardes", "buenas noches", "cómo estás", "saludos", "qué tal", "hola", "buen dia"});
         esKeywords.put("TIME", new String[]{"hora", "reloj", "qué hora", "hora actual", "tiempo", "hora es", "que hora"});
         esKeywords.put("WEATHER", new String[]{"clima", "lluvia", "soleado", "nube", "temperatura", "calor", "frío", "tiempo"});
         esKeywords.put("MUSIC", new String[]{"música", "canción", "reproducir", "escuchar", "playlist", "musica"});
@@ -61,7 +61,7 @@ public class AIService {
         
         // ===== FRENCH KEYWORDS =====
         Map<String, String[]> frKeywords = new HashMap<>();
-        frKeywords.put("GREETING", new String[]{"bonjour", "salut", "coucou", "bonsoir", "comment ça va", "ça va", "bonjour!"});
+        frKeywords.put("GREETING", new String[]{"bonjour", "salut", "coucou", "bonsoir", "comment ça va", "ça va", "bonjour", "salut"});
         frKeywords.put("TIME", new String[]{"heure", "quelle heure", "horaire", "minute", "temps"});
         frKeywords.put("WEATHER", new String[]{"météo", "pluie", "soleil", "nuage", "température", "chaud", "froid"});
         frKeywords.put("MUSIC", new String[]{"musique", "chanson", "jouer", "écouter", "playlist", "mélodie"});
@@ -75,7 +75,7 @@ public class AIService {
         
         // ===== GERMAN KEYWORDS =====
         Map<String, String[]> deKeywords = new HashMap<>();
-        deKeywords.put("GREETING", new String[]{"hallo", "hi", "guten morgen", "guten tag", "guten abend", "wie geht es dir", "hallo!"});
+        deKeywords.put("GREETING", new String[]{"hallo", "hi", "guten morgen", "guten tag", "guten abend", "wie geht es dir", "hallo", "guten Morgen", "Guten Morgen"});
         deKeywords.put("TIME", new String[]{"uhr", "zeit", "wie spät", "stunde", "minute"});
         deKeywords.put("WEATHER", new String[]{"wetter", "regen", "sonne", "wolke", "temperatur", "heiß", "kalt"});
         deKeywords.put("MUSIC", new String[]{"musik", "lied", "spielen", "hören", "playlist", "melodie"});
@@ -226,11 +226,9 @@ public class AIService {
         Map<String, Object> result = new HashMap<>();
         
         try {
-            // Detect intent based on language
             String intent = detectIntent(message, language);
             String response = getResponseForIntent(intent, language);
             
-            // Save conversation
             Conversation conversation = new Conversation(sessionId, message, response, intent);
             conversation.setLanguage(language);
             conversation.setConfidence(0.85);
@@ -267,6 +265,7 @@ public class AIService {
         }
         
         String msg = message.trim();
+        String msgLower = msg.toLowerCase();
         Map<String, Integer> scores = new HashMap<>();
         
         Map<String, String[]> keywords = LANGUAGE_KEYWORDS.get(language);
@@ -280,9 +279,9 @@ public class AIService {
             int score = 0;
             
             for (String word : words) {
-                // For Spanish, French, German (Latin scripts) - case insensitive
-                if (language.equals("es") || language.equals("fr") || language.equals("de") || language.equals("en")) {
-                    if (msg.toLowerCase().contains(word.toLowerCase())) {
+                // For Latin script languages (English, Spanish, French, German) - case insensitive
+                if (language.equals("en") || language.equals("es") || language.equals("fr") || language.equals("de")) {
+                    if (msgLower.contains(word.toLowerCase())) {
                         score += 2;
                     }
                 } else {
