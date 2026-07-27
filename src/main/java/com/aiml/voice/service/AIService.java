@@ -329,3 +329,4 @@ public class AIService {
         return conversationRepository.findBySessionIdOrderByCreatedAtDesc(sessionId);
     }
 }
+
