@@ -34,17 +34,11 @@ public class AIService {
         // ===== GERMAN KEYWORDS (Comprehensive) =====
         Map<String, String[]> deKeywords = new HashMap<>();
         deKeywords.put("GREETING", new String[]{
-            // Various forms of "hello"
             "hallo", "halo", "hello", 
-            // "Good morning" and variations
             "guten morgen", "gutenmorgen", "morgen", 
-            // "Good day" and variations
             "guten tag", "gutentag", "tag", 
-            // "Good evening" and variations
             "guten abend", "gutenabend", "abend",
-            // "How are you" and variations
             "wie geht es dir", "wie gehts", "wie geht's", "wie geht es ihnen",
-            // "Hello" variations
             "servus", "moin", "na", "hallo!", "hi"
         });
         deKeywords.put("TIME", new String[]{"uhr", "zeit", "wie spät", "spät", "stunde", "minute", "uhrzeit"});
@@ -128,7 +122,7 @@ public class AIService {
         zhKeywords.put("ABOUT", new String[]{"关于", "是谁", "能做什么"});
         LANGUAGE_KEYWORDS.put("zh", zhKeywords);
         
-        // ===== RESPONSES (simplified) =====
+        // ===== RESPONSES =====
         // English Responses
         Map<String, String[]> enResponses = new HashMap<>();
         enResponses.put("GREETING", new String[]{"Hello! How can I help you today? 😊", "Hi there! What can I do for you?"});
@@ -277,10 +271,13 @@ public class AIService {
             return "UNKNOWN";
         }
         
+        // Safely normalize language input (handles uppercase, nulls, and extra spaces)
+        String langKey = (language == null || language.trim().isEmpty()) ? "en" : language.trim().toLowerCase();
+        
         String msg = message.trim().toLowerCase();
         Map<String, Integer> scores = new HashMap<>();
         
-        Map<String, String[]> keywords = LANGUAGE_KEYWORDS.get(language);
+        Map<String, String[]> keywords = LANGUAGE_KEYWORDS.get(langKey);
         if (keywords == null) {
             keywords = LANGUAGE_KEYWORDS.get("en");
         }
@@ -315,7 +312,8 @@ public class AIService {
     }
     
     private String getResponseForIntent(String intent, String language) {
-        Map<String, String[]> responses = LANGUAGE_RESPONSES.get(language);
+        String langKey = (language == null || language.trim().isEmpty()) ? "en" : language.trim().toLowerCase();
+        Map<String, String[]> responses = LANGUAGE_RESPONSES.get(langKey);
         if (responses == null) {
             responses = LANGUAGE_RESPONSES.get("en");
         }
@@ -329,4 +327,3 @@ public class AIService {
         return conversationRepository.findBySessionIdOrderByCreatedAtDesc(sessionId);
     }
 }
-
