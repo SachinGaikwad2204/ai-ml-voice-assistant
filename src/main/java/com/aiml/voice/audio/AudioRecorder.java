@@ -2,7 +2,6 @@ package com.aiml.voice.audio;
 
 import javax.sound.sampled.*;
 import java.io.*;
-import java.nio.file.*;
 
 public class AudioRecorder {
     private static final int SAMPLE_RATE = 16000;
